@@ -66,11 +66,17 @@ const updateContact = async (contactId, body) => {
 
 const updateStatusContact = async (contactId, body) => {
   const { favorite } = body;
-  updateFavoriteContact = {
+  const updateFavoriteContact = {
     favorite: favorite,
   };
-  await contactsDB.findByIdAndUpdate(contactId, updateFavoriteContact);
-  const result = await getContactById(contactId);
+
+  const result = await contactsDB.findByIdAndUpdate(
+    contactId,
+    updateFavoriteContact,
+    {
+      new: true,
+    }
+  );
   return result;
 };
 
