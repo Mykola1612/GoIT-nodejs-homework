@@ -44,6 +44,8 @@ const login = async (req, res, next) => {
   await UserMG.findByIdAndUpdate(user._id, { token });
 
   res.json({
+    email,
+    password,
     token,
   });
 };
