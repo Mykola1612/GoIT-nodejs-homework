@@ -35,6 +35,8 @@ const login = async (req, res, next) => {
     throw HttpError(401, "Email or password is wrong");
   }
 
+  const subscription = user.subscription;
+
   const payload = {
     id: user.id,
   };
@@ -44,9 +46,11 @@ const login = async (req, res, next) => {
   await UserMG.findByIdAndUpdate(user._id, { token });
 
   res.json({
-    email,
-    password,
     token,
+    user: {
+      email,
+      subscription,
+    },
   });
 };
 
