@@ -2,7 +2,10 @@ const contactsDB = require("..//models/contacts.js");
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const listContacts = async (req, res, next) => {
-  const result = await contactsDB.find();
+  const { _id: owner } = req.user;
+  const { page = 1, limit = 20 } = req.query;
+  const skip = (page - 1) * limit;
+  const result = await contactsDB.find({ owner }, "", { skip, limit });
   res.status(200).json(result);
 };
 
@@ -16,7 +19,8 @@ const getContactById = async (req, res, next) => {
 };
 
 const addContact = async (req, res, next) => {
-  const result = await contactsDB.create(req.body);
+  const { _id: owner } = req.user;
+  const result = await contactsDB.create({ ...req.body, owner });
   res.status(201).json(result);
 };
 
