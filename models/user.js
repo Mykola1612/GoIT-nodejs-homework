@@ -19,6 +19,10 @@ const userShema = mongoose.Schema({
     type: String,
     default: "",
   },
+  avatarURL: {
+    type: String,
+    required: true,
+  },
 });
 
 const UserMG = mongoose.model("User", userShema);
