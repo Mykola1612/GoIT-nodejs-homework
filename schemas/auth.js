@@ -9,4 +9,10 @@ const authSchema = Joi.object({
   }),
 });
 
-module.exports = { authSchema };
+const emailSchema = Joi.object({
+  email: Joi.string().required().messages({
+    "string.empty": `"email" cannot be an empty field`,
+  }),
+});
+
+module.exports = { authSchema, emailSchema };

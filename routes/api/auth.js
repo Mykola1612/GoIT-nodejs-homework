@@ -31,4 +31,12 @@ router.patch(
   ctrl.newAvatars
 );
 
+router.get("/verify/:verificationToken", ctrl.verifyEmail);
+
+router.post(
+  "/verify",
+  validateBody(schema.emailSchema, "missing fields"),
+  ctrl.verify
+);
+
 module.exports = router;

@@ -23,6 +23,14 @@ const userShema = mongoose.Schema({
     type: String,
     required: true,
   },
+  verify: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    required: [true, "Verify token is required"],
+  },
 });
 
 const UserMG = mongoose.model("User", userShema);
